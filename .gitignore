@@ -1,0 +1,7 @@
+.git
+.aws/*
+!.aws/README.md
+.vagrant
+.ssh/*
+!.ssh/README.md
+*.log
