@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/xenial64"
   config.vm.synced_folder "../", "/devops"
   # files copied
-  config.vm.provision "file", source: "config/hosts", destination: "/tmp/hosts"
+  config.vm.provision "file", source: "config", destination: "/tmp"
   config.vm.provision "file", source: "config/.screenrc", destination: "/home/vagrant/.screenrc"
   config.vm.provision "file", source: ".ssh", destination: "/home/vagrant/.ssh"
   config.vm.provision "file", source: ".aws", destination: "/home/vagrant/.aws"
