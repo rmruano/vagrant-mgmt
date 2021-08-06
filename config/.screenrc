@@ -1,3 +1,6 @@
+# File: ~/.screenrc
+#
+
 hardstatus alwayslastline
 hardstatus string '%{= kG}[ %{G}%H %{g}][ %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B}%Y-%m-%d %{W}%c %{g}]'
 defscrollback 9999
@@ -17,3 +20,10 @@ vbell off
 # vbellwait 2
 #
 width 150
+
+
+# Fix for residual editor text
+altscreen on
+
+# Indicate 256 color screen
+term screen-256color

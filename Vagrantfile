@@ -7,9 +7,9 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "../", "/devops"
   # files copied
   config.vm.provision "file", source: "config", destination: "/tmp"
-  config.vm.provision "file", source: "config/.screenrc", destination: "/home/vagrant/.screenrc"
   config.vm.provision "file", source: ".ssh", destination: "/home/vagrant/.ssh"
   config.vm.provision "file", source: ".aws", destination: "/home/vagrant/.aws"
+  config.vm.provision "file", source: ".terraform.d", destination: "/home/vagrant/.terraform.d"
   # common run
   config.vm.provision "shell", path: "install_common.sh"
   config.vm.define "mgmt" do |node|

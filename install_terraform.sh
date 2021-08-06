@@ -9,7 +9,7 @@ if [ ! -e /opt/.terraform_done ]; then
 	sudo chmod +x terraform
 	mv terraform /usr/local/bin
 
-	echo "I: completed installing terraform..... Remember to execute (and paste your token): terraform login"
+	echo "I: completed installing terraform..... If you haven't provided a .terraform.tfrc.json file remember to execute (and paste your token): terraform login"
 	touch /opt/.terraform_done
 fi
 

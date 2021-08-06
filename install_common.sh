@@ -9,7 +9,7 @@ if [ ! -e /opt/.common_done ]; then
 
   #packets
   echo "I: Install pre requisite packages...."
-  sudo apt-get install -yq  python-minimal python-simplejson aptitude screen
+  sudo apt-get install -yq  python-minimal python-simplejson aptitude screen unzip dos2unix
 
   #hosts
   if [ -e /tmp/hosts ]; then
@@ -18,12 +18,19 @@ if [ ! -e /opt/.common_done ]; then
   fi
   
   #ssh
-  echo "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAvEH2o4mKp7Jrbhgvo7JDSEhw+RUZHLJ59SSUTiRTu9DkrpvvZrQs4YXAStkw9zSsvhJp3kQ/86n16SMA/p12KC9Kr9PeGovXJQMkQjnvYNXmYWiMA9g3ubQ7YCMZWbzIS6aKXc8ujP4Au3RNTcBinPgZorLkMvKlm9EphjRZSLuyBZ+0TLNBA7DHmYGu3Rd69q2rosoWMabsKS/NC9U8JX64P/hXsc68wP4OhSMxQzqf4suGJtBLZHk4R6wr4j+TVwEbDdlD5fL6Vaty7Rf7+ZNeMeYSLhyC1CwyYFEgfmJ1KzBivKGGnnY1hNzHe5Kn39TLeOPJJMs1upLM/6rTUQ== ruben.moraleda.ruano@gmail.com" >> /home/vagrant/.ssh/authorized_keys
+  if [ -e /tmp/authorized_keys ]; then
+	sudo cat /tmp/authorized_keys >> /home/vagrant/.ssh/authorized_keys
+  fi;
   sudo chown -R vagrant:vagrant /home/vagrant/.ssh/*
   sudo chmod 600 /home/vagrant/.ssh/*
   
   #screen
-  sudo chmod 600 /home/vagrant/.screenrc
+  if [ -e /tmp/.screenrc ]; then
+    sudo cp /tmp/.screenrc /home/vagrant/.screenrc
+	sudo chown -R vagrant:vagrant /home/vagrant/.screenrc
+	sudo chmod 600 /home/vagrant/.screenrc
+	dos2unix /home/vagrant/.screenrc
+  fi;
 
   echo "I: Create a flag notifying common configs are done..."
   touch /opt/.common_done
