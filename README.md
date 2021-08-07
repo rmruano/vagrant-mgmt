@@ -48,3 +48,4 @@ About git credentials: https://git-scm.com/book/en/v2/Git-Tools-Credential-Stora
 
 - The VM mounts the parent folder as `/devops`
 - (optional) If no terraform credentials were provided use `terraform login` and paste your token to create it
+- Theia-IDE is available at http://localhost:8000 settings, plugins and extensions are stored in /devops/.theia
