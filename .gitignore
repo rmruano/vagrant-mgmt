@@ -1,7 +1,5 @@
 .git
-.aws/*
-!.aws/README.md
 .vagrant
-.ssh/*
-!.ssh/README.md
 *.log
+devops_sync/*
+!devops_sync/README.md

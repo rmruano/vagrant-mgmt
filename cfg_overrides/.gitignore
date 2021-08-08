@@ -1,0 +1,7 @@
+*
+!.aws
+!.ssh
+!.terraform.d
+!.gitignore
+!home
+!README.md

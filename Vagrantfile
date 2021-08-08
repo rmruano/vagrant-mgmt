@@ -3,14 +3,12 @@
 
 Vagrant.configure("2") do |config|
 
-  config.vm.box = "ubuntu/xenial64"
-  config.vm.synced_folder "../", "/devops"
+  config.vm.box = "ubuntu/hirsute64"
+  config.vm.synced_folder "devops_sync", "/devops", owner: "vagrant", group: "vagrant" # parent folder is synched as /devops
   # files copied
-  config.vm.provision "file", source: "config", destination: "/tmp"
-  config.vm.provision "file", source: ".ssh", destination: "/home/vagrant/.ssh"
-  config.vm.provision "file", source: ".aws", destination: "/home/vagrant/.aws"
-  config.vm.provision "file", source: "scripts", destination: "/home/vagrant/scripts"
-  config.vm.provision "file", source: ".terraform.d", destination: "/home/vagrant/.terraform.d"
+  config.vm.provision "file", source: "scripts", destination: "/home/vagrant/vagrant_scripts"
+  config.vm.provision "file", source: "cfg_defaults", destination: "/tmp/cfg_defaults"
+  config.vm.provision "file", source: "cfg_overrides", destination: "/tmp/cfg_overrides"
   # common run
   config.vm.provision "shell", path: "install_common.sh"
   config.vm.define "mgmt" do |node|
@@ -26,6 +24,8 @@ Vagrant.configure("2") do |config|
     node.vm.provision "shell", path: "install_awscli.sh"
     node.vm.provision "shell", path: "install_terraform.sh"
     node.vm.provision "shell", path: "install_theia_ide.sh"
+    node.vm.provision "shell", path: "bootstrap_devops.sh"
+    node.vm.provision "shell", path: "bootstrap_versioncheck.sh"
   end
 
 end
