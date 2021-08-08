@@ -1,10 +1,15 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+devopsFolder = ENV["DEVOPS_FOLDER"] || "devops_sync"
+
+print "Using "+devopsFolder+" as /devops\n"
+print "You can provide a DEVOPS_FOLDER env var with a different location\n\n"
+
 Vagrant.configure("2") do |config|
 
   config.vm.box = "ubuntu/hirsute64"
-  config.vm.synced_folder "devops_sync", "/devops", owner: "vagrant", group: "vagrant" # parent folder is synched as /devops
+  config.vm.synced_folder devopsFolder, "/devops", owner: "vagrant", group: "vagrant"
   # files copied
   config.vm.provision "file", source: "scripts", destination: "/home/vagrant/vagrant_scripts"
   config.vm.provision "file", source: "cfg_defaults", destination: "/tmp/cfg_defaults"

@@ -3,6 +3,9 @@
 Virtual machine for devops management
 
 - Provision the vm with: `vagrant up` 
+- You can provide a custom DEVOPS_FOLDER path:
+	Windows: `set DEVOPS_FOLDER=../ && vagrant up`
+	Linux: `DEVOPS_FOLDER=../; vagrant up`
 - SSH into the vm with: `vagrant ssh`
 
 ## How to provision the VM with your custom overrides
