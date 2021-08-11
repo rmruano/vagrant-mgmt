@@ -40,11 +40,11 @@ if [ ! -e /opt/.common_done ]; then
   
 	  #aws
 	  sudo chmod -R 600 /tmp/cfg_defaults/.aws/./* /tmp/cfg_defaults/.aws/./.[!.]*
-	  sudo cp -pr .aws /home/vagrant/.aws
+	  sudo cp -pr .aws /home/vagrant/
 	  
 	  #ssh
 	  sudo chmod -R 600 /tmp/cfg_defaults/.ssh/./* /tmp/cfg_defaults/.ssh/./.[!.]*
-	  sudo cp -pr .ssh /home/vagrant/.ssh
+	  sudo cp -pr .ssh /home/vagrant/
 	  #ssh authorized keys
 	  if [ -e /home/vagrant/authorized_keys ]; then
 		sudo cat /home/vagrant/authorized_keys >> /home/vagrant/.ssh/authorized_keys
@@ -54,7 +54,7 @@ if [ ! -e /opt/.common_done ]; then
 	  
 	  #terraform
 	  sudo chmod -R 600 /tmp/cfg_defaults/.terraform.d/./* /tmp/cfg_defaults/.terraform.d/./.[!.]* 
-	  sudo cp -pr .terraform.d /home/vagrant/.terraform.d
+	  sudo cp -pr .terraform.d /home/vagrant/
 	  
 	  #runnable scripts
 	  sudo chown -R vagrant:vagrant /home/vagrant/vagrant_scripts
