@@ -20,7 +20,7 @@ Virtual machine for devops management
 - Chdir into `cfg_overrides` to create your custom files (you can use the sample files in `cfg_defaults`)
 - Put the public and private keys you require into `.ssh/`
 - If you need to authorize other keys into your VM, add the public keys to `cfg_overrides/home/authorized_keys`.
-- Create your `.aws/config` and `.aws/credentials` files.
+- Create your `.aws/config` and `.aws/credentials` files, for convenience, you can optionally put here an id_rsa/id_rsa.pub key pair that you can use when creating instances. If the key pair doesn't exist it will be automatically created for you.
 - Create your terraform cloud `.terraform.d/credentias.tfrc.json`.
 - Put your `.gitconfig` and `.git-credentials` file in `/config/.gitconfig`
 - Put in `home` any other files you may need to be copied to `/home/vagrant/` 
