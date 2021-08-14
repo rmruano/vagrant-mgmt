@@ -10,7 +10,7 @@ if [ ! -e /opt/.aws_done ]; then
 	sudo chown -R vagrant:vagrant /home/vagrant/aws-cli
 	  
 	echo "I: completed installing AWS CLI....."
-	echo /usr/local/bin/aws --versionva
+	echo /usr/local/bin/aws --version
     touch /opt/.aws_done
 fi
 

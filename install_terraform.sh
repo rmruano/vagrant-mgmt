@@ -8,8 +8,12 @@ if [ ! -e /opt/.terraform_done ]; then
 	sudo chown root:root terraform
 	sudo chmod +x terraform
 	mv terraform /usr/local/bin
-
+	
 	echo "I: completed installing terraform....."
+	
+	echo "I: installing terraform switch:tfswitch ....."
+	curl -L https://raw.githubusercontent.com/warrensbox/terraform-switcher/release/install.sh | sudo bash
+	
 	touch /opt/.terraform_done
 fi
 
