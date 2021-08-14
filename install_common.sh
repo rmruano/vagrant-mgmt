@@ -8,7 +8,7 @@ if [ ! -e /opt/.common_done ]; then
   echo "I: Updating package cache..."
   sudo apt-get update
   echo "I: Install pre requisite packages...."
-  sudo apt-get install -yq  python-minimal python-simplejson aptitude screen unzip dos2unix
+  sudo apt-get install -yq  python-minimal python-simplejson aptitude screen unzip dos2unix make
 
   # merge folders
   sudo cp -pr /tmp/cfg_overrides/. /tmp/cfg_defaults/
@@ -62,6 +62,14 @@ if [ ! -e /opt/.common_done ]; then
   
   echo "I: Copy other home directories complete"    
   #copy other home directories and set permissions end ---
+  
+  # local bin
+  mkdir /home/vagrant/bin
+  chmod -R 750 /home/vagrant/bin
+  echo '' >> /home/vagrant/.bashrc
+  echo '# Vagrant custom bin path' >> /home/vagrant/.bashrc
+  echo 'export PATH="$HOME/bin:$PATH"' >> /home/vagrant/.bashrc
+  chmod -R 660 /home/vagrant/.bashrc
   
   # remove tmp files
   rm -Rf /tmp/cfg_defaults

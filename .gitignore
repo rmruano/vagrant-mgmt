@@ -2,5 +2,6 @@
 .vagrant
 .theia
 *.log
+.idea
 devops_sync/*
 !devops_sync/README.md

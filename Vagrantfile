@@ -18,11 +18,15 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "install_common.sh"
   config.vm.define "mgmt" do |node|
     node.vm.hostname = "mgmt"
-    node.vm.network "private_network", ip: "192.168.45.10"
+    node.vm.network "private_network", ip: "192.168.90.140"
+    node.vm.network:forwarded_port, guest: 22, host: 22, host_ip: "127.0.0.1" #enable remote ssh
 	node.vm.network:forwarded_port, guest: 8000, host: 8000, host_ip: "127.0.0.1" #theia ide port only available to localhost
     config.vm.provider :virtualbox do |vb|
-       vb.customize ["modifyvm", :id, "--memory", "2048"]
-       vb.customize ["modifyvm", :id, "--cpus", "2"]
+       vb.customize ["modifyvm", :id, "--memory", "4096"]
+       vb.customize ["modifyvm", :id, "--cpus", "4"]
+       vb.customize ['modifyvm', :id, '--natdnsproxy1', 'off' ]
+       vb.customize ['modifyvm', :id, '--natdnshostresolver1', 'off' ]
+       vb.customize ["modifyvm", :id, "--nictype1", "virtio"]
     end
     node.vm.provision "shell", path: "install_git.sh"
     node.vm.provision "shell", path: "install_docker.sh"

@@ -30,3 +30,4 @@ Virtual machine for devops management
 
 - The VM mounts the parent folder as `/devops` and keeps it synchronized, be careful, these are the files form your host machine. ([more info](devops_sync/README.md))
 - Theia-IDE is available at http://localhost:8000 settings, plugins and extensions are stored in `/devops/.theia`
+- `tfswitch` allows you to change between terraform versions, it will create a symlink to the chosen terraform version on `/home/vagrant/bin`, that path is automatically added to the vagrant user path env var.
