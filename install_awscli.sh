@@ -17,7 +17,7 @@ fi
 if [ ! -e /home/vagrant/.aws/id_rsa ]; then
 	echo "I: generating a new management key pair....."
 	ssh-keygen -b 4096 -t rsa -f /home/vagrant/.aws/id_rsa -q -N ""
-else; then
+else
 	echo "I: management key pair found at /home/vagrant/.aws/id_rsa ....."
 fi
 
