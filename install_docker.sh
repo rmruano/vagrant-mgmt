@@ -26,6 +26,9 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
+# add the vagrant user to the docker group
+sudo usermod -aG docker vagrant
+
 echo "I: completed installing docker and docker-compose....."
 
 exit 0
