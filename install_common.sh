@@ -34,6 +34,13 @@ if [ ! -e /opt/.common_done ]; then
   rm -Rf /tmp/cfg_defaults/home/.gitignore
   sudo chmod 600 /tmp/cfg_defaults/home/./* /tmp/cfg_defaults/home/./.[!.]*
   sudo cp -pr /tmp/cfg_defaults/home/. /home/vagrant
+
+  #screen
+  mkdir /home/vagrant/.screen
+  sudo chown -R vagrant:vagrant /home/vagrant/.screen
+	sudo chmod 700 /home/vagrant/.screen
+  echo "export SCREENDIR=\$HOME/.screen" >> /home/vagrant/.bashrc
+  echo "PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '" >> /home/vagrant/.bashrc
   
   #copy other home directories and set permissions start ---
   echo "I: Copy other home directories start"
