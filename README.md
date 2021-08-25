@@ -15,6 +15,10 @@ Virtual machine for devops management
 - `cfg_overrides` should contain your sensitive data. All files there are gitignored to prevent leaks. Use the sample files in `cfg_defaults` and customize them accordingly into `cfg_overrides`. 
 - `devops_sync` folder is synchronized with the VM and is available at `/devops` ([more info](devops_sync/README.md))
 
+## Synched folder
+Due poor performance of VirtualBox synched folder on Windows systems, this VM will access the shared folder through NFS
+- On Windows systems install the NFS plugin: `vagrant plugin install vagrant-winnfsd`
+
 ## Before provisioning checklist (inside the HOST):
 
 - Chdir into `cfg_overrides` to create your custom files (you can use the sample files in `cfg_defaults`)
