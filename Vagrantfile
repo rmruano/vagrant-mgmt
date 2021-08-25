@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-print "Please remember to install winnfsd plugin on WINDOWS hosts: vagrant plugin install vagrant-winnfsd"
+#print "Please remember to install winnfsd plugin on WINDOWS hosts: vagrant plugin install vagrant-winnfsd"
 
 devopsFolder = ENV["DEVOPS_FOLDER"] || "devops_sync"
 
@@ -11,9 +11,8 @@ print "You can provide a DEVOPS_FOLDER env var with a different location\n\n"
 Vagrant.configure("2") do |config|
 
   config.vm.box = "ubuntu/hirsute64"
-  #config.vm.synced_folder devopsFolder, "/devops", owner: "vagrant", group: "vagrant"
-  config.vm.synced_folder devopsFolder, "/devops", type: "nfs",
-        mount_options: %w{rw,async,fsc,tcp,nolock,vers=3,rsize=32768,wsize=32768,hard,noatime,actimeo=2}
+  config.vm.synced_folder devopsFolder, "/devops/sync", owner: "vagrant", group: "vagrant"
+  #config.vm.synced_folder devopsFolder, "/devops", type: "nfs", mount_options: %w{rw,async,fsc,tcp,nolock,vers=3,rsize=32768,wsize=32768,hard,noatime,actimeo=2}
 
   # files copied
   config.vm.provision "file", source: "scripts", destination: "/home/vagrant/vagrant_scripts"

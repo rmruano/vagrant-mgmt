@@ -1,6 +1,6 @@
 ## Devops synchronized folder 
 
-This folder is synchronized as `/devops` within the VM to serve as main path to perform the devops work. 
+This folder is synchronized as `/devops/sync` within the VM to serve as main path to perform the devops work.
 
 - It will be the base work path for the Theia IDE (available on http://localhost:8000)
 - It should contain the projects, the scripts & the data that should be maintained between VM reprovisions.
@@ -12,9 +12,12 @@ This folder is synchronized as `/devops` within the VM to serve as main path to 
 Sample bootstrap.sh:
 ````
 #!/bin/bash
-cd /devops
+cd /devops/local
 if [ ! -e .bootstrap_ok ]; then	
     git clone https://github.com/rmruano/terraform-samples
     touch .bootstrap_ok
 fi
 ````
+
+### Warning: Virtual box synced folders have extreme low performance on Windows systems.
+On Windows systems it is advised to use `/devops/local` as work path, it's much faster and stored in the VM hd but data will be lost if the VM is destroyed.
