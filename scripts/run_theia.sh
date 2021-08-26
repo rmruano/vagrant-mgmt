@@ -16,7 +16,7 @@ sudo docker run -d -it --init \
 	-v "/devops:/home/project:cached" \
 	-v "/home/vagrant/.gitconfig:/home/theia/.gitconfig:cached" \
 	-v "/home/vagrant/.git-credentials:/home/theia/.git-credentials:cached" \
-	-v "/devops/.theia:/home/theia/.theia:cached" \
+	-v "/devops/sync/.theia:/home/theia/.theia:cached" \
 	theiaide/theia:next
 	
 exit 0

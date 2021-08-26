@@ -26,7 +26,7 @@ guest ok = no" >> /etc/samba/smb.conf
   echo "I: Running /devops/sync/bootstrap.sh if exists"
 	if [ -e /devops/sync/bootstrap.sh ]; then
 		sudo chmod +x /devops/sync/bootstrap.sh;
-		/devops/sync/bootstrap.sh
+		sudo -u vagrant /devops/sync/bootstrap.sh
 		echo "I: completed running the /devops/sync/bootstrap.sh"
 	fi
 

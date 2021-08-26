@@ -35,7 +35,7 @@ if [ ! -e /opt/.common_done ]; then
   rm -Rf /tmp/cfg_defaults/home/.gitignore
   sudo dos2unix /tmp/cfg_defaults/home/*
   sudo dos2unix /tmp/cfg_defaults/home/.*
-  sudo find /tmp/cfg_defaults/home/* -type d | sudo xargs chmod u+x
+  sudo find /tmp/cfg_defaults/home -type d | sudo xargs chmod u+x
   sudo chmod 600 /tmp/cfg_defaults/home/./* /tmp/cfg_defaults/home/./.[!.]*
   sudo cp -pr /tmp/cfg_defaults/home/. /home/vagrant
 
