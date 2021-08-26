@@ -21,6 +21,7 @@ read only = no
 writable = yes
 guest ok = no" >> /etc/samba/smb.conf
   (echo vagrant; echo vagrant) | sudo smbpasswd -s -a vagrant
+  sudo service smbd restart
 
   # Run synced bootstrap if exists.
   echo "I: Running /devops/sync/bootstrap.sh if exists"
