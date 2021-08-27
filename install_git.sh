@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ! -e /opt/.git_done ]; then
+if [ ! -e /home/vagrant/provision/.git_done ]; then
 
   #packets
   echo "I: Install pre requisite packages...."
@@ -10,7 +10,7 @@ if [ ! -e /opt/.git_done ]; then
   git config --global credential.helper "store --file ~/.git-credentials"
   
   echo "I: Create a flag notifying git configs are done..."
-  touch /opt/.git_done
+  touch /home/vagrant/provision/.git_done
 
 fi
 

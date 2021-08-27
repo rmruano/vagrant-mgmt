@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ! -e /opt/.terraform_done ]; then
+if [ ! -e /home/vagrant/provision/.terraform_done ]; then
 	cd /tmp
 	sudo apt-get install -yq unzip
 	wget -q https://releases.hashicorp.com/terraform/1.0.3/terraform_1.0.3_linux_amd64.zip
@@ -14,7 +14,7 @@ if [ ! -e /opt/.terraform_done ]; then
 	echo "I: installing terraform switch:tfswitch ....."
 	curl -L https://raw.githubusercontent.com/warrensbox/terraform-switcher/release/install.sh | sudo bash
 	
-	touch /opt/.terraform_done
+	touch /home/vagrant/provision/.terraform_done
 fi
 
 exit 0

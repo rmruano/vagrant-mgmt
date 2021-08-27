@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ! -e /opt/.common_done ]; then
+if [ ! -e /home/vagrant/provision/.common_done ]; then
 
   ln -s /devops /home/vagrant/devops 
   
@@ -12,13 +12,16 @@ if [ ! -e /opt/.common_done ]; then
   sudo apt-get install make dos2unix
 
   # merge folders
-  sudo cp -pr /tmp/cfg_overrides/. /tmp/cfg_defaults/
+  sudo cp -pr /home/vagrant/provision/cfg_overrides/. /home/vagrant/provision/cfg_defaults/
+
+  # remove overrides, not needed anymore
+  rm -Rf /home/vagrant/provision/cfg_overrides
   
   # change working dir, set permissions and remove comments and ignores
-  cd /tmp/cfg_defaults
-  sudo chown -R vagrant:vagrant /tmp/cfg_defaults
-  find /tmp/cfg_defaults/ -type f -name "README.md" -delete
-  find /tmp/cfg_defaults/ -type f -name ".gitignore" -delete
+  cd /home/vagrant/provision/cfg_defaults
+  sudo chown -R vagrant:vagrant /home/vagrant/provision/cfg_defaults
+  find /home/vagrant/provision/cfg_defaults/ -type f -name "README.md" -delete
+  find /home/vagrant/provision/cfg_defaults/ -type f -name ".gitignore" -delete
 
   #hosts
   if [ -e hosts ]; then 
@@ -31,13 +34,13 @@ if [ ! -e /opt/.common_done ]; then
   #home
   echo "I: Copy home files"
   
-  rm -Rf /tmp/cfg_defaults/home/README.md
-  rm -Rf /tmp/cfg_defaults/home/.gitignore
-  sudo dos2unix /tmp/cfg_defaults/home/*
-  sudo dos2unix /tmp/cfg_defaults/home/.*
-  sudo find /tmp/cfg_defaults/home -type d | sudo xargs chmod u+x
-  sudo chmod 600 /tmp/cfg_defaults/home/./* /tmp/cfg_defaults/home/./.[!.]*
-  sudo cp -pr /tmp/cfg_defaults/home/. /home/vagrant
+  rm -Rf /home/vagrant/provision/cfg_defaults/home/README.md
+  rm -Rf /home/vagrant/provision/cfg_defaults/home/.gitignore
+  sudo dos2unix /home/vagrant/provision/cfg_defaults/home/*
+  sudo dos2unix /home/vagrant/provision/cfg_defaults/home/.*
+  sudo chmod 600 /home/vagrant/provision/cfg_defaults/home/./* /home/vagranxitt/provision/cfg_defaults/home/./.[!.]*
+  sudo find /home/vagrant/provision/cfg_defaults/home -type d | sudo xargs chmod u+x
+  sudo cp -pr /home/vagrant/provision/cfg_defaults/home/. /home/vagrant
 
   #screen
   mkdir /home/vagrant/.screen
@@ -50,11 +53,11 @@ if [ ! -e /opt/.common_done ]; then
   echo "I: Copy other home directories start"
   
 	  #aws
-	  sudo chmod -R 600 /tmp/cfg_defaults/.aws/./* /tmp/cfg_defaults/.aws/./.[!.]*
+	  sudo chmod -R 600 /home/vagrant/provision/cfg_defaults/.aws/./* /home/vagrant/provision/cfg_defaults/.aws/./.[!.]*
 	  sudo cp -pr .aws /home/vagrant/
 	  
 	  #ssh
-	  sudo chmod -R 600 /tmp/cfg_defaults/.ssh/./* /tmp/cfg_defaults/.ssh/./.[!.]*
+	  sudo chmod -R 600 /home/vagrant/provision/cfg_defaults/.ssh/./* /home/vagrant/provision/cfg_defaults/.ssh/./.[!.]*
 	  sudo cp -pr .ssh /home/vagrant/
 	  #ssh authorized keys
 	  if [ -e /home/vagrant/authorized_keys ]; then
@@ -64,7 +67,7 @@ if [ ! -e /opt/.common_done ]; then
 	  fi;
 	  
 	  #terraform
-	  sudo chmod -R 600 /tmp/cfg_defaults/.terraform.d/./* /tmp/cfg_defaults/.terraform.d/./.[!.]* 
+	  sudo chmod -R 600 /home/vagrant/provision/cfg_defaults/.terraform.d/./* /home/vagrant/provision/cfg_defaults/.terraform.d/./.[!.]* 
 	  sudo cp -pr .terraform.d /home/vagrant/
 	  
 	  #runnable scripts
@@ -81,14 +84,11 @@ if [ ! -e /opt/.common_done ]; then
   echo '# Vagrant custom bin path' >> /home/vagrant/.bashrc
   echo 'export PATH="$HOME/bin:$PATH"' >> /home/vagrant/.bashrc
   chmod -R 660 /home/vagrant/.bashrc
-  
-  # remove tmp files
-  rm -Rf /tmp/cfg_defaults
-  rm -Rf /tmp/cfg_overrides
-  cd /tmp
 
+
+  cd /home/vagrant/provision
   echo "I: Create a flag notifying common configs are done..."
-  touch /opt/.common_done
+  touch /home/vagrant/provision/.common_done
 
 fi
 
