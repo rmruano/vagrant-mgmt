@@ -35,8 +35,8 @@ if [ ! -e /home/vagrant/provision/.common_done ]; then
   #SSL and certificates provisioning
     echo "I: SSL & self-signed root CA provisioning"
     cp -pr ssl /home/vagrant/
-    sudo chmod 740 /home/vagrant/ssl
     sudo chmod 640 /home/vagrant/ssl/*
+    sudo chmod 740 /home/vagrant/ssl
     # Install self signed root ca certificate
     sudo cp -pr /home/vagrant/ssl/rootCA.pem /usr/local/share/ca-certificates/DevopsMgmt-rootCA.crt
     sudo update-ca-certificates
@@ -45,7 +45,7 @@ if [ ! -e /home/vagrant/provision/.common_done ]; then
       mkdir /home/vagrant/ssl/certificates
     fi
     sudo chmod 760 /home/vagrant/ssl/certificates
-    sudo chmod -R 660 /home/vagrant/ssl/certificates
+    sudo chmod -R 660 /home/vagrant/ssl/certificates/*
 
 
   #home
