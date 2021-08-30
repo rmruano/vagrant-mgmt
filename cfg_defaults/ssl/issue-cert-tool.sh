@@ -22,11 +22,11 @@ echo -e "    DESTINATION: ${LIGHTBLUE}${OUTPUT_DIR}/${NC}"
 echo
 echo "------------------"
 echo
-echo "FQDN or CN name examples:"
-echo "-    myserver.localhost"
-echo "-    *.localhost      (will secure also localhost)"
-echo "-    www.myservice.dev"
-echo "-    *.myservice.dev  (will secure also myservice.dev)"
+echo "FQDN or CN name examples, do not use wilcards, this generator automatically adds a wilcard prefix:"
+echo "-    myserver.localhost (will secure myserver.localhost and *.myserver.localhost)"
+echo "-    localhost      (will secure localhost and *.localhost)"
+echo "-    www.myservice.dev  (will secure www.myservice.dev and *.www.myservice.dev)"
+echo "-    myservice.dev  (will secure myservice.dev and *.myservice.dev)"
 echo -e "${RED}Server FQDN or Common Name?${NC}"
 read userFqdn
 
@@ -35,8 +35,9 @@ echo "------------------"
 echo
 echo "Certificate file name examples:"
 echo "-    myserver_localhost"
+echo "-    localhost"
 echo "-    www_myservice_dev"
-echo "-    wildcard_myservice_dev"
+echo "-    myservice_dev"
 DEFAULT_FILE=$(echo $userFqdn | sed -e "s/*/all/g" | sed -e "s/\./_/g")
 echo -e "${RED}Certificate name?${NC} (used for the filename, it will overwrite) [Default: ${LIGHTBLUE}$DEFAULT_FILE${NC}]"
 read userFileName
@@ -49,6 +50,9 @@ echo "------------------"
 CONFIG=$(cat $SCRIPT_DIR/in_csr.cnf | sed -e "s/FQDN/$userFqdn/g")
 echo -e "${LIGHTBLUE}$CONFIG${NC}"
 echo "------------------"
+CONFIG_EXT=$(cat $SCRIPT_DIR/in_v3.ext | sed -e "s/FQDN/$userFqdn/g")
+echo -e "${LIGHTBLUE}$CONFIG_EXT${NC}"
+echo "------------------"
 
 echo
 echo "Generating private KEY and CSR (Certificate Signing Request)..."
@@ -57,10 +61,10 @@ openssl req -new -sha256 -nodes -out $OUTPUT_DIR/$userFileName.csr -newkey rsa:2
 echo "Generating certificate for 10 years..."
 if [ ! -e $SCRIPT_DIR/rootCA.srl ]; then
   # CA serial file doesn't exist
-  openssl x509 -req -in $OUTPUT_DIR/$userFileName.csr -CA $SCRIPT_DIR/rootCA.pem -CAkey $SCRIPT_DIR/rootCA.key -CAserial $SCRIPT_DIR/rootCA.srl -CAcreateserial -out $OUTPUT_DIR/$userFileName.crt -days 3650 -sha256 -extfile $SCRIPT_DIR/in_v3.ext
+  openssl x509 -req -in $OUTPUT_DIR/$userFileName.csr -CA $SCRIPT_DIR/rootCA.pem -CAkey $SCRIPT_DIR/rootCA.key -CAserial $SCRIPT_DIR/rootCA.srl -CAcreateserial -out $OUTPUT_DIR/$userFileName.crt -days 3650 -sha256 -extfile <( echo "$CONFIG_EXT")
 else
   # CA serial file does exist
-  openssl x509 -req -in $OUTPUT_DIR/$userFileName.csr -CA $SCRIPT_DIR/rootCA.pem -CAkey $SCRIPT_DIR/rootCA.key -CAserial $SCRIPT_DIR/rootCA.srl -out $OUTPUT_DIR/$userFileName.crt -days 3650 -sha256 -extfile $SCRIPT_DIR/in_v3.ext
+  openssl x509 -req -in $OUTPUT_DIR/$userFileName.csr -CA $SCRIPT_DIR/rootCA.pem -CAkey $SCRIPT_DIR/rootCA.key -CAserial $SCRIPT_DIR/rootCA.srl -out $OUTPUT_DIR/$userFileName.crt -days 3650 -sha256 -extfile  <( echo "$CONFIG_EXT")
 fi
 
 echo
