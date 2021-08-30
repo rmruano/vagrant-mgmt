@@ -1,7 +1,8 @@
 ## Self-signed SSL certificates handling
 ##### Warning: No files are ignored. Make sure you don't commit sensitive files here.
 
-A demo rootCA SSL cert is provided to generate custom SSL certs.
+A DEMO rootCA SSL cert is provided to generate custom SSL certs.
+- This certificate is provided as an example and must be used just to issue ssl certificates intended for local development.
 - You must install the root certificate `rootCA.pem` or `rootCA.crt` as a `Trusted Root Certification Authority`
 - To install the root certificate use `certmgr` for windows or `keychain` for mac. 
 - Usually import is automatically started on your OS by double-clicking the `rootCA.crt` file and selecting the `Trusted Root Certification Authorities` store. 
