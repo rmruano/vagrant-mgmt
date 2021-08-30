@@ -38,6 +38,12 @@ echo "**  Terraform credentials >>> `ls -la /home/vagrant/.terraform.d | grep cr
 
 echo ""
 echo ""
+echo "**  Node version >>> `node --version`"
+echo "**  Npm version >>> `npm --version`"
+echo "**  Nvm version >>> `nvm --version`"
+
+echo ""
+echo ""
 
 echo "Theia IDE is available at: http://localhost:8000"
 

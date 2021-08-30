@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
     node.vm.hostname = "mgmt"
     node.vm.network "private_network", ip: "192.168.90.140"
     node.vm.network:forwarded_port, guest: 22, host: 1122 # expose 1122 on host available to anyone
-    node.vm.network:forwarded_port, guest: 8000, host: 8000, host_ip: "127.0.0.1" # Expose theia ide port only available to localhost
+    #node.vm.network:forwarded_port, guest: 8000, host: 8000, host_ip: "127.0.0.1" # Expose theia ide port only available to localhost
     config.vm.provider :virtualbox do |vb, override|
        override.vm.box = "ubuntu/hirsute64"
        override.vm.network "private_network", ip: "192.168.90.140", nic_type: "virtio"
@@ -46,6 +46,7 @@ Vagrant.configure("2") do |config|
     node.vm.provision "shell", path: "install_docker.sh"
     node.vm.provision "shell", path: "install_awscli.sh"
     node.vm.provision "shell", path: "install_terraform.sh"
+    node.vm.provision "shell", path: "install_node.sh"
     node.vm.provision "shell", path: "install_theia_ide.sh"
     node.vm.provision "shell", path: "install_devops.sh"
     node.vm.provision "shell", path: "bootstrap_versioncheck.sh"

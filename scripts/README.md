@@ -1,1 +1,1 @@
-Scripts used by VAGRANT provisioners to boot services.
+Scripts used by VAGRANT provisioners to boot services and management tools
