@@ -8,7 +8,7 @@ if [ ! -e /home/vagrant/provision/.common_done ]; then
     echo "I: Updating package cache..."
     sudo apt-get update
     echo "I: Install pre requisite packages...."
-    sudo apt-get install -yq  python-minimal python-simplejson aptitude screen unzip
+    sudo apt-get install -yq  python-minimal python-simplejson aptitude screen unzip ntpdate
     sudo apt-get install -yq make dos2unix
 
   # merge folders

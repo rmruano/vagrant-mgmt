@@ -98,12 +98,12 @@ fi
 cd -
 if [[ "$DAEMON" == "true" ]]; then
   # run container as daemon
-  docker run -it -d -p $CONTAINER_PORT:80 -p $CONTAINER_SSL_PORT:443 --name $CONTAINER_NAME -v "$SOURCE_DIR":/var/www/html -v $CONTAINER_SSL_CRT:/certificates/cert.crt -v $CONTAINER_SSL_KEY:/certificates/cert.key $IMAGE_NAME
+  docker run --user 1000 -it -d -p $CONTAINER_PORT:80 -p $CONTAINER_SSL_PORT:443 --name $CONTAINER_NAME -v "$SOURCE_DIR":/var/www/html -v $CONTAINER_SSL_CRT:/certificates/cert.crt -v $CONTAINER_SSL_KEY:/certificates/cert.key $IMAGE_NAME
   # connect to container
   docker exec -it $CONTAINER_NAME /bin/bash
 else
   # run container as fg
-  docker run -it -p $CONTAINER_PORT:80 -p $CONTAINER_SSL_PORT:443 --name $CONTAINER_NAME -v "$SOURCE_DIR":/var/www/html -v $CONTAINER_SSL_CRT:/certificates/cert.crt -v $CONTAINER_SSL_KEY:/certificates/cert.key $IMAGE_NAME
+  docker run --user 1000 -it -p $CONTAINER_PORT:80 -p $CONTAINER_SSL_PORT:443 --name $CONTAINER_NAME -v "$SOURCE_DIR":/var/www/html -v $CONTAINER_SSL_CRT:/certificates/cert.crt -v $CONTAINER_SSL_KEY:/certificates/cert.key $IMAGE_NAME
   docker stop $CONTAINER_NAME
   docker rm $CONTAINER_NAME
 fi

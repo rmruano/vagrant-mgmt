@@ -22,15 +22,16 @@ RUN echo "$cert_crt_text" > /certificates/cert.crt
 RUN echo "$cert_key_text" > /certificates/cert.key
 RUN ln -s /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-enabled/default-ssl.conf && \
     ln -s /etc/apache2/mods-available/socache_shmcb.load /etc/apache2/mods-enabled/socache_shmcb.load && ln -s /etc/apache2/mods-available/socache_shmcb.conf /etc/apache2/mods-enabled/socache_shmcb.conf && \
-    ln -s /etc/apache2/mods-available/ssl.conf /etc/apache2/mods-enabled/ssl.conf && ln -s /etc/apache2/mods-available/ssl.load /etc/apache2/mods-enabled/ssl.load
+    ln -s /etc/apache2/mods-available/ssl.conf /etc/apache2/mods-enabled/ssl.conf && ln -s /etc/apache2/mods-available/ssl.load /etc/apache2/mods-enabled/ssl.load && \
+    ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/rewrite.load
 
 RUN sed -ri -e 's!/etc/ssl/certs/ssl-cert-snakeoil.pem!/certificates/cert.crt!g' /etc/apache2/sites-available/*.conf && \
     sed -ri -e 's!/etc/ssl/private/ssl-cert-snakeoil.key!/certificates/cert.key!g' /etc/apache2/sites-available/*.conf && \
     sed -ri -e "s!</VirtualHost>!ServerName $server_name\n</VirtualHost>!g" /etc/apache2/sites-available/*.conf
 
 # ADD USER
-RUN groupadd -g 1000 vagrant && useradd -g 1000 -u 1000 vagrant && usermod -g 1000 -G vagrant,root vagrant
-#USER vagrant
+RUN groupadd -g 1000 vagrant && useradd -g 1000 -u 1000 -m --home-dir /home/vagrant vagrant && usermod -g 1000 -G vagrant,root vagrant
+USER vagrant
 
 # To run a the image for testing installations: docker run -it -d -p 8080:80 --name my-apache-php-app -v "$PWD":/var/www/html php:7.2-apache
 # To connect: docker exec -it my-apache-php-app /bin/bash
