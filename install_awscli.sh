@@ -11,7 +11,11 @@ if [ ! -e /home/vagrant/provision/.aws_done ]; then
 	  
 	echo "I: completed installing AWS CLI....."
 	echo /usr/local/bin/aws --version
-    touch /home/vagrant/provision/.aws_done
+
+  # Install amplify?
+  #npm i -g @aws-amplify/cli
+
+  touch /home/vagrant/provision/.aws_done
 fi
 
 if [ ! -e /home/vagrant/.aws/id_rsa ]; then

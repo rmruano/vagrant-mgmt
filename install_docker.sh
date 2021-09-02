@@ -30,6 +30,11 @@ if [ ! -e /home/vagrant/provision/.docker_done ]; then
   # add the vagrant user to the docker group
   sudo usermod -aG docker vagrant
 
+  # completion
+  sudo curl \
+      -L https://raw.githubusercontent.com/docker/compose/1.29.2/contrib/completion/bash/docker-compose \
+      -o /etc/bash_completion.d/docker-compose
+
   echo "I: completed installing docker and docker-compose....."
 
 	touch /home/vagrant/provision/.docker_done

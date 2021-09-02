@@ -43,10 +43,11 @@ Vagrant.configure("2") do |config|
     end
     node.vm.provision "shell", path: "install_common.sh"
     node.vm.provision "shell", path: "install_git.sh"
+    node.vm.provision "shell", path: "install_node.sh"
     node.vm.provision "shell", path: "install_docker.sh"
     node.vm.provision "shell", path: "install_awscli.sh"
     node.vm.provision "shell", path: "install_terraform.sh"
-    node.vm.provision "shell", path: "install_node.sh"
+    node.vm.provision "shell", path: "install_kubernetes.sh"
     node.vm.provision "shell", path: "install_theia_ide.sh"
     node.vm.provision "shell", path: "install_devops.sh"
     node.vm.provision "shell", path: "bootstrap_versioncheck.sh"

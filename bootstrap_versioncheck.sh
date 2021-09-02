@@ -42,6 +42,12 @@ echo "**  Node version >>> `node --version`"
 echo "**  Npm version >>> `npm --version`"
 echo "**  Nvm version >>> `nvm --version`"
 
+
+echo ""
+echo ""
+echo "**  Kubectl version >>> `kubectl version --client`"
+
+
 echo ""
 echo ""
 
