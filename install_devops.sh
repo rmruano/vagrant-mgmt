@@ -12,30 +12,22 @@ if [ ! -e /home/vagrant/provision/.devops_done ]; then
   sudo chown vagrant:vagrant /devops/README.md
 
   # Install samba ---------------------------------------
-  sudo apt-get install -y samba
-  sudo echo "[Devops]
-comment = Devops local
-path = /devops/local
-browseable = yes
-read only = no
-writable = yes
-guest ok = no" >> /etc/samba/smb.conf
-  (echo vagrant; echo vagrant) | sudo smbpasswd -s -a vagrant
-  sudo service smbd restart
+#  sudo apt-get install -y samba
+#  sudo echo "[Devops]
+#comment = Devops local
+#path = /devops/local
+#browseable = yes
+#read only = no
+#writable = yes
+#guest ok = no" >> /etc/samba/smb.conf
+#  (echo vagrant; echo vagrant) | sudo smbpasswd -s -a vagrant
+#  sudo service smbd restart
 
   # Install tools ---------------------------------------
     # mongodb cli
     echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
     apt-get update
     apt-get install -yq mongodb-mongosh
-	
-  # Run overrides bootstrap if exists ---------------------------------------
-	echo "I: Running /home/vagrant/provision/cfg_defaults/bootstrap.sh if exists"
-	if [ -e /home/vagrant/provision/cfg_defaults/bootstrap.sh ]; then
-		sudo chmod +x /home/vagrant/provision/cfg_defaults/bootstrap.sh;
-		sudo -u vagrant /home/vagrant/provision/cfg_defaults/bootstrap.sh
-		echo "I: completed running the /home/vagrant/provision/cfg_defaults/bootstrap.sh"
-	fi
 
   # Run synced bootstrap if exists ---------------------------------------
 	echo "I: Running /devops/sync/bootstrap.sh if exists"

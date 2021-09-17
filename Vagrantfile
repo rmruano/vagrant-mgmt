@@ -22,8 +22,10 @@ Vagrant.configure("2") do |config|
   config.vm.define "mgmt" do |node|
     node.vm.hostname = "mgmt"
     node.vm.network "private_network", ip: "192.168.90.140"
-    node.vm.network:forwarded_port, guest: 22, host: 1122 # expose 1122 on host available to anyone
-    #node.vm.network:forwarded_port, guest: 8000, host: 8000, host_ip: "127.0.0.1" # Expose theia ide port only available to localhost
+    node.vm.network:forwarded_port, guest: 22, host: 1122, host_ip: "127.0.0.1" # expose 1122 on host available to localhost
+    #node.vm.network:forwarded_port, guest: 8080, host: 8000, host_ip: "127.0.0.1" # Expose theia ide port only available to localhost
+    #node.vm.network:forwarded_port, guest: 8001, host: 8003, host_ip: "127.0.0.1" # Additional convenience ports available to localhost
+	#node.vm.network:forwarded_port, guest: 8443, host: 8443, host_ip: "127.0.0.1" # Expose a common port for dashboards
     config.vm.provider :virtualbox do |vb, override|
        override.vm.box = "ubuntu/hirsute64"
        override.vm.network "private_network", ip: "192.168.90.140", nic_type: "virtio"
@@ -50,7 +52,8 @@ Vagrant.configure("2") do |config|
     node.vm.provision "shell", path: "install_kubernetes.sh"
     node.vm.provision "shell", path: "install_theia_ide.sh"
     node.vm.provision "shell", path: "install_devops.sh"
-    node.vm.provision "shell", path: "bootstrap_versioncheck.sh"
+    node.vm.provision "shell", path: "install_bootstrap.sh"
+    node.vm.provision "shell", path: "versioncheck.sh"
   end
 
 end
