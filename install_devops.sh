@@ -43,7 +43,7 @@ if [ ! -e /home/vagrant/provision/.devops_done ]; then
     if [[ \$TERM != linux && ! \$PROMPT_COMMAND =~ _update_ps1 ]]; then
         PROMPT_COMMAND=\"_update_ps1; \$PROMPT_COMMAND\"
     fi
-  "
+  " >> ~/.bashrc
 
   # change prompt color to cyan bg to avoid any misunderstanding
   sed -ri -e "s/01;32m/00;46m/g" ~/.bashrc

@@ -57,6 +57,7 @@ if [ ! -e ~/provision/.common_done ]; then
     sudo dos2unix ~/provision/cfg/home/*
     sudo dos2unix ~/provision/cfg/home/.*
     sudo chmod 600 ~/provision/cfg/home/./* ~/provision/cfg/home/./.[!.]*
+    sudo find ~/provision/cfg/home -type f | sudo xargs chmod 600
     sudo find ~/provision/cfg/home -type d | sudo xargs chmod u+x
     sudo cp -pr ~/provision/cfg/home/. /home/vagrant
 
