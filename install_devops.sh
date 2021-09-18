@@ -22,16 +22,29 @@ if [ ! -e /home/vagrant/provision/.devops_done ]; then
 
   # prompt customization -------------------------------------------
   # https://github.com/magicmonty/bash-git-prompt
-  git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
-  echo "GIT_PROMPT_END_USER=\"\n\${BrightCyan}\$(whoami)@\$(hostname)\${ResetColor} \${BoldRed}➤  \${ResetColor}\"" >> ~/.bash-git-prompt/.git-prompt-colors.sh
-  echo "# Git prompt
-  if [ -f \"\$HOME/.bash-git-prompt/gitprompt.sh\" ]; then
-      GIT_PROMPT_ONLY_IN_REPO=1
-      source ~/.bash-git-prompt/gitprompt.sh
-  fi
-" >> ~/.bashrc
+#  git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
+#  echo "GIT_PROMPT_END_USER=\"\n\${BrightCyan}\$(whoami)@\$(hostname)\${ResetColor} \${BoldRed}➤  \${ResetColor}\"" >> ~/.bash-git-prompt/.git-prompt-colors.sh
+#  echo "# Git prompt
+#  if [ -f \"\$HOME/.bash-git-prompt/gitprompt.sh\" ]; then
+#      GIT_PROMPT_ONLY_IN_REPO=1
+#      source ~/.bash-git-prompt/gitprompt.sh
+#  fi
+#" >> ~/.bashrc
 
-  # change prompt color to cyan bg to avoid confussions
+  # Powerline shell https://github.com/b-ryan/powerline-shell#bash
+  # Remember to install the fonts on the host first: https://github.com/powerline/fonts  >>>  sudo apt-get install fonts-powerline
+  sudo apt-get install -yq python3-pip
+  pip install powerline-shell
+  echo "# Powerline prompt
+    function _update_ps1() {
+        PS1=\$(~/.local/bin/powerline-shell \$?)
+    }
+    if [[ \$TERM != linux && ! \$PROMPT_COMMAND =~ _update_ps1 ]]; then
+        PROMPT_COMMAND=\"_update_ps1; \$PROMPT_COMMAND\"
+    fi
+  "
+
+  # change prompt color to cyan bg to avoid any misunderstanding
   sed -ri -e "s/01;32m/00;46m/g" ~/.bashrc
 
 

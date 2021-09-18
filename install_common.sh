@@ -10,7 +10,8 @@ if [ ! -e ~/provision/.common_done ]; then
     echo "I: Install pre requisite packages...."
     sudo apt-get install -yq  python-minimal python-simplejson aptitude screen unzip ntpdate
     sudo apt-get install -yq make dos2unix
-	  sudo apt-get install -yq traceroute
+	  sudo apt-get install -yq traceroute net-tools tcpdump netstat
+	  sudo apt-get install -yq python3-pip
 
   # merge folders
     sudo cp -pr ~/provision/cfg_overrides/. ~/provision/cfg_defaults/
