@@ -28,14 +28,14 @@ if [ ! -e /home/vagrant/provision/.kubernetes_done ]; then
   #sudo install minikube-linux-amd64 /usr/local/bin/minikube
   
   # helm
-  wget https://get.helm.sh/helm-v3.6.3-linux-amd64.tar.gz
+  wget -q https://get.helm.sh/helm-v3.6.3-linux-amd64.tar.gz
   tar -xvf helm-v3.6.3-linux-amd64.tar.gz
   rm -Rf helm-v3.6.3-linux-amd64.tar.gz
   sudo mv linux-amd64/helm /usr/local/bin/helm
   rm -Rf linux-amd64
   helm completion bash > helm_completion
   sudo mv helm_completion /etc/bash_completion.d/helm
-  echo 'alias h=helm' >>~/.bashrc
+  echo 'alias h=helm' >>~/.bash
   echo 'complete -F __start_helm h' >>~/.bashrc
   
 

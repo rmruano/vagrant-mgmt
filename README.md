@@ -35,6 +35,6 @@ The synced folder performance is pretty good, you can work right from the synced
 ## After provisioning (inside the VM):
 
 - The VM mounts `devops_sync` as `/devops/sync` and keeps it synchronized, be careful, these are the files form your host machine. ([more info](devops_sync/README.md))
-- The VM creates `/devops/local` as base work dir for all your operations, it's stored within the VM hd and will be deleted if it's destroyed. The folder is shared as a `\\192.168.90.140` samba resource with `vagrant` as user and password.
+- The VM creates `/devops/local` as base work dir for all your operations, it's stored within the VM hd and will be deleted if it's destroyed. The folder is shared as a `\\192.168.2.2` samba resource with `vagrant` as user and password.
 - Theia-IDE is available at http://localhost:8000 settings, plugins and extensions are stored in `/devops/.theia`
 - `tfswitch` allows you to change between terraform versions, it will create a symlink to the chosen terraform version on `/home/vagrant/bin`, that path is automatically added to the vagrant user path env var.

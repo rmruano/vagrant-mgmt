@@ -11,6 +11,31 @@ if [ ! -e /home/vagrant/provision/.devops_done ]; then
   sudo chown vagrant:vagrant /devops/local
   sudo chown vagrant:vagrant /devops/README.md
 
+
+
+  # Better ls --------------
+  sudo apt-get install exa
+  echo "# Better ls
+  alias ll='exa -bghHlS'" >> ~/.bash_aliases
+
+
+
+  # prompt customization -------------------------------------------
+  # https://github.com/magicmonty/bash-git-prompt
+  git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
+  echo "GIT_PROMPT_END_USER=\"\n\${BrightCyan}\$(whoami)@\$(hostname)\${ResetColor} \${BoldRed}➤  \${ResetColor}\"" >> ~/.bash-git-prompt/.git-prompt-colors.sh
+  echo "# Git prompt
+  if [ -f \"\$HOME/.bash-git-prompt/gitprompt.sh\" ]; then
+      GIT_PROMPT_ONLY_IN_REPO=1
+      source ~/.bash-git-prompt/gitprompt.sh
+  fi
+" >> ~/.bashrc
+
+  # change prompt color to cyan bg to avoid confussions
+  sed -ri -e "s/01;32m/00;46m/g" ~/.bashrc
+
+
+
   # Install samba ---------------------------------------
 #  sudo apt-get install -y samba
 #  sudo echo "[Devops]
@@ -23,20 +48,27 @@ if [ ! -e /home/vagrant/provision/.devops_done ]; then
 #  (echo vagrant; echo vagrant) | sudo smbpasswd -s -a vagrant
 #  sudo service smbd restart
 
+
+
   # Install tools ---------------------------------------
     # mongodb cli
+    wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
     echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
-    apt-get update
-    apt-get install -yq mongodb-mongosh
+    sudo apt-get update
+    sudo apt-get install -yq mongodb-mongosh
+
+
 
   # Run synced bootstrap if exists ---------------------------------------
-	echo "I: Running /devops/sync/bootstrap.sh if exists"
-	if [ -e /devops/sync/bootstrap.sh ]; then
-		sudo chmod +x /devops/sync/bootstrap.sh;
-		sudo -u vagrant /devops/sync/bootstrap.sh
-		echo "I: completed running the /devops/sync/bootstrap.sh"
-	fi
-  sudo touch /home/vagrant/provision/.devops_done
+    echo "I: Running /devops/sync/bootstrap.sh if exists"
+    if [ -e /devops/sync/bootstrap.sh ]; then
+      sudo chmod +x /devops/sync/bootstrap.sh;
+      sudo -u vagrant /devops/sync/bootstrap.sh
+      echo "I: completed running the /devops/sync/bootstrap.sh"
+    fi
+
+
+  touch /home/vagrant/provision/.devops_done
 fi
 echo "----------------------------"
 

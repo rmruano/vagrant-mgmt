@@ -10,7 +10,7 @@ if [ ! -e ~/provision/.common_done ]; then
     echo "I: Install pre requisite packages...."
     sudo apt-get install -yq  python-minimal python-simplejson aptitude screen unzip ntpdate
     sudo apt-get install -yq make dos2unix
-	sudo apt-get install -yq traceroute
+	  sudo apt-get install -yq traceroute
 
   # merge folders
     sudo cp -pr ~/provision/cfg_overrides/. ~/provision/cfg_defaults/
@@ -55,7 +55,7 @@ if [ ! -e ~/provision/.common_done ]; then
     rm -Rf ~/provision/cfg/home/.gitignore
     sudo dos2unix ~/provision/cfg/home/*
     sudo dos2unix ~/provision/cfg/home/.*
-    sudo chmod 600 ~/provision/cfg/home/./* /home/vagranxitt/provision/cfg/home/./.[!.]*
+    sudo chmod 600 ~/provision/cfg/home/./* ~/provision/cfg/home/./.[!.]*
     sudo find ~/provision/cfg/home -type d | sudo xargs chmod u+x
     sudo cp -pr ~/provision/cfg/home/. /home/vagrant
 
@@ -88,8 +88,8 @@ if [ ! -e ~/provision/.common_done ]; then
 	  sudo cp -pr .terraform.d ~/
 	  
 	  #runnable scripts
-	  sudo chown -R vagrant:vagrant ~/vagrant_scripts
-	  sudo chmod -R 770 ~/vagrant_scripts
+	  sudo chown -R vagrant:vagrant ~/provision/scripts
+	  sudo chmod -R 770 ~/provision/scripts
   
   echo "I: Copy other home directories complete"    
   #copy other home directories and set permissions end ---

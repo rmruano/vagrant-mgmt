@@ -13,7 +13,7 @@ if [ ! -e /home/vagrant/provision/.bootstrap_done ]; then
 		echo "I: completed running the /home/vagrant/provision/cfg_defaults/bootstrap.sh"
 	fi
 	
-	sudo touch /home/vagrant/provision/.bootstrap_done
+	touch /home/vagrant/provision/.bootstrap_done
   
 fi
 echo "----------------------------"

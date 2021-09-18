@@ -7,7 +7,7 @@ if [ ! -e /home/vagrant/provision/.terraform_done ]; then
 	unzip -q terraform_1.0.3_linux_amd64.zip
 	sudo chown root:root terraform
 	sudo chmod +x terraform
-	mv terraform /usr/local/bin
+	sudo mv terraform /usr/local/bin
 	
 	echo "I: completed installing terraform....."
 	
