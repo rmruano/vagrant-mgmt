@@ -33,6 +33,7 @@ if [ ! -e /home/vagrant/provision/.devops_done ]; then
 
   # Powerline shell https://github.com/b-ryan/powerline-shell#bash
   # Remember to install the fonts on the host first: https://github.com/powerline/fonts  >>>  sudo apt-get install fonts-powerline
+  echo "Remember to install the fonts on the host first >>>  sudo apt-get install fonts-powerline"
   sudo apt-get install -yq python3-pip
   pip install powerline-shell
   echo "# Powerline prompt
