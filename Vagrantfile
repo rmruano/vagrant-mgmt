@@ -36,7 +36,7 @@ Vagrant.configure("2") do |config|
        vb.customize ['modifyvm', :id, '--natdnshostresolver1', 'off']
     end
     config.vm.provider "vmware_desktop" do |vw, override|
-       override.vm.network "private_network", ip: "192.168.80.140"
+       override.vm.network "private_network", ip: "192.168.2.2"
        vw.vmx["memsize"] = "4096"
        vw.vmx["numvcpus"] = "4"
     end

@@ -34,6 +34,17 @@ if [ ! -e /home/vagrant/provision/.docker_done ]; then
   sudo curl \
       -L https://raw.githubusercontent.com/docker/compose/1.29.2/contrib/completion/bash/docker-compose \
       -o /etc/bash_completion.d/docker-compose
+      
+  sudo mkdir /etc/docker
+      
+  sudo echo '{
+	"exec-opts": ["native.cgroupdriver=systemd"],
+	"log-driver": "json-file",
+	"log-opts": {
+	  "max-size": "50m"
+	},
+	"storage-driver": "overlay2"
+}' | sudo tee /etc/docker/daemon.json
 
   echo "I: completed installing docker and docker-compose....."
 
