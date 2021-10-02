@@ -5,7 +5,13 @@ A DEMO rootCA SSL cert is provided to generate custom SSL certs.
 - This certificate is provided as an example and must be used just to issue ssl certificates intended for local development.
 - You must install the root certificate `rootCA.pem` or `rootCA.crt` as a `Trusted Root Certification Authority`
 - To install the root certificate use `certmgr` for windows or `keychain` for mac. 
-- Usually import is automatically started on your OS by double-clicking the `rootCA.crt` file and selecting the `Trusted Root Certification Authorities` store. 
+- Usually import is automatically started on your OS by double-clicking the `rootCA.crt` file and selecting the `Trusted Root Certification Authorities` store.
+ On linux (ca-certificates requires the .crt file to be a .pem one in order to work):
+    - `sudo install ca-certificates`
+    - `sudo cp rootCA.pem /usr/local/share/ca-certificates/rootCA.crt`
+    - `sudo chmod 644 /usr/local/share/ca-certificates/rootCA.crt`
+    - `sudo update-ca-certificates`
+- You may need to import the root certificate into your browser as a Certification authority (check chrome 'certitificate' settings)
 
 ### Demo rootCA certificate valid for 10 years
 ##### rootCA.key passphrase: `rootCA`
