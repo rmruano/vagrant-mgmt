@@ -11,8 +11,10 @@ print "You can provide a DEVOPS_FOLDER env var with a different location\n\n"
 Vagrant.configure("2") do |config|
 
   config.vm.box = "generic/ubuntu2104"
-  config.vm.synced_folder devopsFolder, "/devops/sync", owner: "vagrant", group: "vagrant"
-  #config.vm.synced_folder devopsFolder, "/devops/sync", type: "smb", owner: "vagrant", group: "vagrant"
+  config.vm.synced_folder devopsFolder, "/devops/sync",  type: "nfs",
+    mount_options: ['actimeo=2'],
+    nfs_version: 4,
+    nfs_udp: false
 
   # files copied
   config.vm.provision "file", source: "scripts", destination: "/home/vagrant/provision/scripts"

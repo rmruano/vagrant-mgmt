@@ -6,7 +6,6 @@ echo "I: Running devops bootstrap"
 if [ ! -e /home/vagrant/provision/.devops_done ]; then
 
   # Create local work path ---------------------------------------
-  sudo cp /vagrant/devops_sync/README.md /devops
   sudo mkdir /devops/local
   sudo chown vagrant:vagrant /devops/local
   sudo chown vagrant:vagrant /devops/README.md
